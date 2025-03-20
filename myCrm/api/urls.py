@@ -1,8 +1,10 @@
-
-from django.contrib import admin
-from django.urls import path, include
-from . import views
+#backend/api/urls.py
+from django.urls import path
+from api.views import CreateUserView
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 urlpatterns = [
-    path('', views.home, name='home'),
+    path('user/register/', CreateUserView.as_view(), name='register'),
+    path('token/', TokenObtainPairView.as_view(), name='get_token'),
+    path('token/refresh/', TokenRefreshView.as_view(), name='refresh_token'),
 ]
