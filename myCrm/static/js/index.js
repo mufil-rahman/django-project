@@ -1,6 +1,8 @@
 const token = localStorage.getItem("access");
 const usernameElement = document.getElementById("username");
 const passwordElement = document.getElementById("password");
+const newusernameElement = document.getElementById("newUsername");
+const newpasswordElement = document.getElementById("newPassword");
 
 const recordSection = document.getElementById("recordSection");
 const homeContent = document.getElementById("homeContent");
@@ -8,6 +10,7 @@ const addRecordNav = document.getElementById("addRecordNav");
 const recordBody = document.getElementById("recordBody");
 const loginBtn = document.getElementById("loginBtn");
 const logoutBtn = document.getElementById("logoutBtn");
+const registerBtn = document.getElementById("registerBtn");
 
 logoutBtn.addEventListener("click", handleLogout);
 
@@ -18,12 +21,32 @@ async function handleLogin() {
     const response = await axios.post("/api/auth/token/", { username, password });
     localStorage.setItem("access", response.data.access);
     localStorage.setItem("refresh", response.data.refresh);
-    // bootstrap.Modal.getInstance(document.getElementById("authModal")).hide();
-    $("#authModal").modal("hide");
+    // bootstrap.Modal.getInstance(document.getElementById("loginModal")).hide();
+    $("#loginModal").modal("hide");
     
     loadRecords();
   } catch (err) {
     alert("Invalid login");
+  }
+}
+
+async function handleRegister() {
+  const username = newusernameElement.value;
+  const password = newpasswordElement.value;
+  try {
+     await axios.post("/api/users/register/", { username, password
+    });
+    
+    $("#registerModal").modal("hide");
+    const response = await axios.post("/api/auth/token/", { username, password });
+    localStorage.setItem("access", response.data.access);
+    localStorage.setItem("refresh", response.data.refresh);
+    alert("User registered successfully");
+    location.reload();
+    
+  }
+  catch (err) {
+    alert("Invalid register");
   }
 }
 

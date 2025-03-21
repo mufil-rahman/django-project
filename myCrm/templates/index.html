@@ -19,20 +19,21 @@
             <a class="nav-link" href="record">Add Record</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" id="loginBtn" data-bs-toggle="modal" data-bs-target="#authModal" style="cursor: pointer;" >Login</a>
+            <a class="nav-link" id="loginBtn" data-bs-toggle="modal" data-bs-target="#loginModal" style="cursor: pointer;" >Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="registerBtn" data-bs-toggle="modal" data-bs-target="#registrationModal" style="cursor: pointer;" >Register</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" id="logoutBtn" style="display: none; cursor: pointer;">Logout</a>
           </li>
         </ul>
-        <!-- <button class="btn btn-outline-light me-2" id="loginBtn" data-bs-toggle="modal" data-bs-target="#authModal">Login</button> -->
-        <!-- <button class="btn btn-outline-light" id="logoutBtn" style="display: none;">Logout</button> -->
       </div>
     </div>
   </nav>
 
-  <!-- Auth Modal -->
-  <div class="modal fade" id="authModal" tabindex="-1" aria-hidden="true">
+  <!-- Login Modal -->
+  <div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content p-3">
         <div class="modal-header">
@@ -44,6 +45,23 @@
         </div>
         <div class="modal-footer">
           <button class="btn btn-primary" onclick="handleLogin()">Login</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Register Modal -->
+  <div class="modal fade" id="registrationModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content p-3">
+        <div class="modal-header">
+          <h5 class="modal-title">Register</h5>
+        </div>
+        <div class="modal-body">
+          <input type="text" id="newUsername" class="form-control mb-2" placeholder="Username" />
+          <input type="password" id="newPassword" class="form-control mb-2" placeholder="Password" />
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-primary" onclick="handleRegister()">Login</button>
         </div>
       </div>
     </div>
