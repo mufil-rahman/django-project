@@ -25,22 +25,29 @@
     </nav>
 
     <div class="container mt-5">
-      <h2 id="formTitle">Add Record</h2>
-      <form id="recordForm">
-        <input class="form-control mb-2" placeholder="First Name" id="first_name" required />
-        <input class="form-control mb-2" placeholder="Last Name" id="last_name" required />
-        <input class="form-control mb-2" placeholder="Email" id="email" required />
-        <input class="form-control mb-2" placeholder="Phone" id="phone" required />
-        <input class="form-control mb-2" placeholder="Address" id="address" required />
-        <input class="form-control mb-2" placeholder="City" id="city" required />
-        <input class="form-control mb-2" placeholder="State" id="state" required />
-        <input class="form-control mb-2" placeholder="Zip Code" id="zip_code" required />
-        <a href="/" class="btn btn-secondary">
-          <i class="fas fa-arrow-left"></i> Back
-      </a>
-        <button type="submit" class="btn btn-primary" id="updateSubmitBtn"> <i class="fas fa-save"></i> Submit </button>
-        <button type="button" class="btn btn-danger ms-2" id="deleteBtn" style="display: none;"><i class="fas fa-trash-alt"></i> Delete</button>
-      </form>
+      <div class="card">
+        <div class="card-header">
+          <h2 id="formTitle">Add Record</h2>
+        </div>
+        <div class="card-body">
+          <form id="recordForm">
+            <input class="form-control mb-2" placeholder="First Name" id="first_name" required />
+            <input class="form-control mb-2" placeholder="Last Name" id="last_name" required />
+            <input class="form-control mb-2" placeholder="Email" id="email" required />
+            <input class="form-control mb-2" placeholder="Phone" id="phone" required />
+            <input class="form-control mb-2" placeholder="Address" id="address" required />
+            <input class="form-control mb-2" placeholder="City" id="city" required />
+            <input class="form-control mb-2" placeholder="State" id="state" required />
+            <input class="form-control mb-2" placeholder="Zip Code" id="zip_code" required />
+            <a href="/" class="btn btn-secondary">
+              <i class="fas fa-arrow-left"></i> Back
+          </a>
+            <button type="submit" class="btn btn-primary" id="updateSubmitBtn"> <i class="fas fa-save"></i> Submit </button>
+            <button type="button" class="btn btn-danger ms-2" id="deleteBtn" style="display: none;"><i class="fas fa-trash-alt"></i> Delete</button>
+          </form>
+        </div>
+      </div>
+
     </div>
 
   <script src="/static/js/record.js"></script>
