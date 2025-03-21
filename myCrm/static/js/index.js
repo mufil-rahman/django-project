@@ -9,7 +9,9 @@ const recordBody = document.getElementById("recordBody");
 const loginBtn = document.getElementById("loginBtn");
 const logoutBtn = document.getElementById("logoutBtn");
 
-async function login() {
+logoutBtn.addEventListener("click", handleLogout);
+
+async function handleLogin() {
   const username = usernameElement.value;
   const password = passwordElement.value;
   try {
@@ -52,9 +54,9 @@ async function loadRecords() {
   }
 }
 
-logoutBtn.addEventListener("click", () => {
+function handleLogout(e) {
   localStorage.clear();
   location.reload();
-});
+};
 
 if (token) loadRecords();

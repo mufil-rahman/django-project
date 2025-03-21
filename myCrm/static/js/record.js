@@ -6,6 +6,7 @@ const deleteBtn = document.getElementById("deleteBtn");
 const updateSubmitBtn = document.getElementById("updateSubmitBtn");
 const formTitle = document.getElementById("formTitle");
 const recordForm = document.getElementById("recordForm");
+const logoutBtn = document.getElementById("logoutBtn");
 
 if (!token) window.location = "/";
 
@@ -34,6 +35,7 @@ if (recordId) {
 }
 
 recordForm.addEventListener("submit", handleSubutAndUpdate);
+logoutBtn.addEventListener("click", handleLogout);
 
 async function handleSubutAndUpdate(e) {
     e.preventDefault();
@@ -48,4 +50,9 @@ async function handleSubutAndUpdate(e) {
       await axios.post("/api/records/", data, { headers });
     }
     window.location = "/";
+}
+
+function handleLogout() {
+  localStorage.clear();
+  location.reload();
 }
