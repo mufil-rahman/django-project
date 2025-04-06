@@ -33,7 +33,6 @@ class CRMQuestionAnsweringView(generics.GenericAPIView):
         if not question:
             return Response({"error": "Question is required."}, status=400)
 
-        # Correct Gemini usage
         llm = ChatGoogleGenerativeAI(
             model="gemini-2.0-flash",
             temperature=0.7,
@@ -44,10 +43,11 @@ class CRMQuestionAnsweringView(generics.GenericAPIView):
             input_variables=["question"],
             template="You are a CRM assistant. Answer the following question: {question}"
         )
-        chain = LLMChain(llm=llm, prompt=prompt)
+
+        chain = prompt | llm
 
         response = chain.invoke({"question": question})
         if not response:
             return Response({"error": "No response from the model."}, status=500)
-        return Response({"answer": response['text']}, status=200)
-    
+
+        return Response({"answer": response.content if hasattr(response, 'content') else response['text']}, status=200)
