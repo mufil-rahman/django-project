@@ -8,7 +8,10 @@ from .models import Record
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.prompts import PromptTemplate
 from langchain.chains import LLMChain
-
+from dotenv import load_dotenv
+import os
+load_dotenv()
+GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
 
 class CreateUserView(generics.CreateAPIView):
     queryset = User.objects.all()
@@ -36,7 +39,7 @@ class CRMQuestionAnsweringView(generics.GenericAPIView):
         llm = ChatGoogleGenerativeAI(
             model="gemini-2.0-flash",
             temperature=0.7,
-            google_api_key="AIzaSyDfCi9bn4TltJWDs5hPaAB-l-6GRu09BLk"
+            google_api_key=GEMINI_API_KEY
         )
 
         prompt = PromptTemplate(
