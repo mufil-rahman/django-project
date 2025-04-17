@@ -36,6 +36,12 @@ class CRMQuestionAnsweringView(generics.GenericAPIView):
         if not question:
             return Response({"error": "Question is required."}, status=400)
 
+        records = Record.objects.all()
+
+        serialized_records = RecordSerializer(records, many=True).data
+
+        
+
         llm = ChatGoogleGenerativeAI(
             model="gemini-2.0-flash",
             temperature=0.7,
@@ -44,12 +50,12 @@ class CRMQuestionAnsweringView(generics.GenericAPIView):
 
         prompt = PromptTemplate(
             input_variables=["question"],
-            template="You are a CRM assistant. Answer the following question: {question}"
+            template="You are a CRM assistant. Answer the following question: {question} based on the records: {serialized_records}. No formatting, just the plain answer.",
         )
 
         chain = prompt | llm
 
-        response = chain.invoke({"question": question})
+        response = chain.invoke({"question": question , "serialized_records": serialized_records})
         if not response:
             return Response({"error": "No response from the model."}, status=500)
 
