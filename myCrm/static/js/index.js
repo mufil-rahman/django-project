@@ -12,6 +12,13 @@ const loginBtn = document.getElementById("loginBtn");
 const logoutBtn = document.getElementById("logoutBtn");
 const registerBtn = document.getElementById("registerBtn");
 
+const headers = { Authorization: `Bearer ${token}` };
+const askBtn = document.getElementById("askBtn");
+const questionInput = document.getElementById("questionInput");
+const answerContainer = document.getElementById("answerContainer");
+const answerText = document.getElementById("answerText");
+const assistantBtn = document.getElementById("assistantBtn");
+
 logoutBtn.addEventListener("click", handleLogout);
 
 async function handleLogin() {
@@ -25,6 +32,7 @@ async function handleLogin() {
     $("#loginModal").modal("hide");
     
     loadRecords();
+    assistantBtn.style.display = "block";
   } catch (err) {
     alert("Invalid login");
   }
@@ -82,4 +90,26 @@ function handleLogout(e) {
   location.reload();
 };
 
-if (token) loadRecords();
+if (token) {
+  loadRecords();
+  assistantBtn.style.display = "block";
+} else {
+  assistantBtn.style.display = "none";
+}
+
+askBtn.addEventListener("click", async () => {
+  const question = questionInput.value.trim();
+  if (!question) {
+    alert("Please enter a question.");
+    return;
+  }
+
+  try {
+    const response = await axios.post("/api/crm/question/", { question }, { headers });
+    answerText.textContent = response.data.answer;
+    answerContainer.style.display = "block";
+  } catch (error) {
+    console.error("Error fetching answer:", error);
+    alert("Failed to get an answer. Please try again later.");
+  }
+});
